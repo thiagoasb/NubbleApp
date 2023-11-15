@@ -17,6 +17,7 @@ export function Button({title, loading}: ButtonProps) {
       height={50}
       alignItems="center"
       justifyContent="center"
+      borderRadius="s16"
       // style={{
       //   paddingHorizontal: 20,
       //   paddingVertical: 14,
