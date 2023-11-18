@@ -20,7 +20,8 @@ function App(): JSX.Element {
           <Text bold preset="headingLarge" italic>
             Coffstack
           </Text>
-          <Button title="Entrar" />
+          <Button title="Entrar" marginBottom="s12" />
+          <Button loading title="Seconnd" />
         </View>
       </SafeAreaView>
     </ThemeProvider>
