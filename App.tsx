@@ -20,9 +20,13 @@ function App(): JSX.Element {
           <Text bold preset="headingLarge" italic>
             Coffstack
           </Text>
-          <Button title="Primary" marginBottom="s12" />
-          <Button preset="outline" title="Outline" marginBottom="s12" />
-          <Button preset="secondary" title="Secondary" marginBottom="s12" />
+          <Button disabled title="Primary" marginBottom="s12" />
+          <Button
+            disabled
+            preset="outline"
+            title="Outline"
+            marginBottom="s12"
+          />
           <Button loading title="Seconnd" />
         </View>
       </SafeAreaView>
