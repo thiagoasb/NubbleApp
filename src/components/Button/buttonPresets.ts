@@ -21,4 +21,10 @@ export const buttonPresets: Record<ButtonPreset, ButtonUI> = {
     },
     content: 'primary',
   },
+  secondary: {
+    container: {
+      backgroundColor: 'carrotSecondary',
+    },
+    content: 'primaryContrast',
+  },
 };

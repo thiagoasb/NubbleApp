@@ -22,6 +22,7 @@ function App(): JSX.Element {
           </Text>
           <Button title="Primary" marginBottom="s12" />
           <Button preset="outline" title="Outline" marginBottom="s12" />
+          <Button preset="secondary" title="Secondary" marginBottom="s12" />
           <Button loading title="Seconnd" />
         </View>
       </SafeAreaView>
