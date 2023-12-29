@@ -27,13 +27,12 @@ function App(): JSX.Element {
             Digite seu e-mail e senha para entrar
           </Text>
 
-          <Box mb="s20">
-            <TextInput
-              errorMessage="mensagem de erro"
-              label="E-mail"
-              placeholder="Digite seu e-mail"
-            />
-          </Box>
+          <TextInput
+            errorMessage="mensagem de erro"
+            label="E-mail"
+            placeholder="Digite seu e-mail"
+            boxProps={{mb: 's20'}}
+          />
           <Box>
             <TextInput
               label="Senha"
