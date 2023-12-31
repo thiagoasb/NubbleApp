@@ -1,14 +1,14 @@
 import React from 'react';
 import {Box} from '../../../components/Box/Box';
-import {Icon} from '../../../components/Icon/Icon';
 import {TextInput} from '../../../components/TextInput/TextInput';
 import {Text} from '../../../components/Text/Text';
 import {Button} from '../../../components/Button/Button';
 import {Screen} from '../../../components/Screen/Screen';
+import {PasswordInput} from '../../../components/PasswordInput/PasswordInput';
 
 export function LoginScreen() {
   return (
-    <Screen>
+    <Screen scrollable>
       <Text marginBottom="s8" preset="headingLarge">
         Olá
       </Text>
@@ -23,11 +23,7 @@ export function LoginScreen() {
         boxProps={{mb: 's20'}}
       />
       <Box>
-        <TextInput
-          label="Senha"
-          placeholder="Digite sua senha"
-          RightComponent={<Icon name="eyeOn" />}
-        />
+        <PasswordInput label="Senha" placeholder="Digite sua senha" />
       </Box>
 
       <Text color="primary" preset="paragraphSmall" bold mt="s10">
