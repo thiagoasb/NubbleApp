@@ -1,4 +1,9 @@
 import React from 'react';
+
+import {zodResolver} from '@hookform/resolvers/zod';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {useForm} from 'react-hook-form';
+
 import {
   Screen,
   Button,
@@ -6,12 +11,10 @@ import {
   FormTextInput,
   FormPasswordInput,
 } from '@components';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '@routes';
 import {useResetNavigationSuccess} from '@hooks';
-import {useForm} from 'react-hook-form';
+import {RootStackParamList} from '@routes';
+
 import {signUpSchema, SignUpSchema} from './signUpSchema';
-import {zodResolver} from '@hookform/resolvers/zod';
 
 type ScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpScreen'>;
 
