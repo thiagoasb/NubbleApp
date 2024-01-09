@@ -10,7 +10,7 @@ import React from 'react';
 import {ThemeProvider} from '@shopify/restyle/dist/context';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
-import {Router} from './src/Routes/Routes';
+import {Router} from './src/routes/Routes';
 import {theme} from './src/theme/theme';
 
 function App(): JSX.Element {
