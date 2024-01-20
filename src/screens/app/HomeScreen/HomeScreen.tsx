@@ -6,14 +6,31 @@ import {Post, postService} from '@domain';
 import {PostItem, Screen} from '@components';
 import {AppTabScreenProps} from '@routes';
 
+import {HomeEmpty} from './components/HomeEmpty';
 import {HomeHeader} from './components/HomeHeader';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>) {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<boolean | null>(null);
   const [postList, setPostList] = useState<Post[]>([]);
 
+  async function fetchData() {
+    try {
+      setError(null);
+      setLoading(true);
+      const list = await postService.getList();
+      setPostList(list);
+    } catch (err) {
+      // console.log('ERROR:', error);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
-    postService.getList().then(list => setPostList(list));
+    fetchData();
   }, []);
 
   function renderItem({item}: ListRenderItemInfo<Post>) {
@@ -27,7 +44,11 @@ export function HomeScreen({navigation}: AppTabScreenProps<'HomeScreen'>) {
         data={postList}
         keyExtractor={item => item.id}
         renderItem={renderItem}
+        contentContainerStyle={{flex: postList.length === 0 ? 1 : undefined}}
         ListHeaderComponent={<HomeHeader />}
+        ListEmptyComponent={
+          <HomeEmpty refetch={fetchData} error={error} loading={loading} />
+        }
       />
     </Screen>
   );
@@ -37,4 +58,5 @@ const $screen: StyleProp<ViewStyle> = {
   paddingTop: 0,
   paddingBottom: 0,
   paddingHorizontal: 0,
+  flex: 1,
 };
