@@ -3,16 +3,18 @@ import {useEffect, useState} from 'react';
 import {Post, postService} from '@domain';
 
 export function usePostList() {
+  const [postList, setPostList] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<boolean | null>(null);
-  const [postList, setPostList] = useState<Post[]>([]);
+  const [page, setPage] = useState(1);
 
   async function fetchData() {
     try {
       setError(null);
       setLoading(true);
-      const list = await postService.getList();
-      setPostList(list);
+      const list = await postService.getList(page);
+      setPage(prev => prev + 1);
+      setPostList(prev => [...prev, ...list]);
     } catch (err) {
       // console.log('ERROR:', error);
       setError(true);
@@ -21,8 +23,15 @@ export function usePostList() {
     }
   }
 
+  function fetchNextPage() {
+    if (!loading) {
+      fetchData();
+    }
+  }
+
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return {
@@ -30,5 +39,6 @@ export function usePostList() {
     error,
     loading,
     refetch: fetchData,
+    fetchNextPage,
   };
 }
