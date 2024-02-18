@@ -10,6 +10,8 @@ import React from 'react';
 import {ThemeProvider} from '@shopify/restyle/dist/context';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
+import {Toast} from '@components';
+
 import {Router} from './src/routes/Routes';
 import {theme} from './src/theme/theme';
 
@@ -18,6 +20,7 @@ function App(): JSX.Element {
     <SafeAreaProvider>
       <ThemeProvider theme={theme}>
         <Router />
+        <Toast />
       </ThemeProvider>
     </SafeAreaProvider>
   );
