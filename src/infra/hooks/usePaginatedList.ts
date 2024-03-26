@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 import {useInfiniteQuery} from '@tanstack/react-query';
 import {Page} from '@types';
 
-interface UsePaginatedListResult<TData> {
+export interface UsePaginatedListResult<TData> {
   list: TData[];
   isError: boolean | null;
   isLoading: boolean;
