@@ -1,14 +1,16 @@
 import {QueryKeys} from '@infra';
 import {useQuery} from '@tanstack/react-query';
-import {useDebounce} from 'src/hooks/useDebounce';
+
+import {useDebounce} from '@hooks';
 
 import {authService} from '../authService';
 
 interface Param {
   username: string;
+  enabled: boolean;
 }
 
-export function useAuthUsernameIsAvailable({username}: Param) {
+export function useAuthUsernameIsAvailable({username, enabled}: Param) {
   const debouncedUsername = useDebounce(username, 1500);
 
   const {data, isFetching} = useQuery({
@@ -16,10 +18,13 @@ export function useAuthUsernameIsAvailable({username}: Param) {
     queryFn: () => authService.isUserNameAvailable(debouncedUsername),
     retry: false,
     staleTime: 20000,
+    enabled: enabled && debouncedUsername.length > 0,
   });
+
+  const isDebouncing = debouncedUsername !== username;
 
   return {
     isAvailable: !!data,
-    isFetching,
+    isFetching: isFetching || isDebouncing,
   };
 }
