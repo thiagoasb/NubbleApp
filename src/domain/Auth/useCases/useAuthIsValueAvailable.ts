@@ -25,6 +25,7 @@ export function useAuthUsernameIsAvailable({username, enabled}: Param) {
 
   return {
     isAvailable: !!data,
+    isUnavailable: data === false,
     isFetching: isFetching || isDebouncing,
   };
 }
