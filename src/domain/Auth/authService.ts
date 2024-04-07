@@ -25,7 +25,7 @@ async function signUp(signUpData: SignUpData): Promise<void> {
   await authApi.signUp(signUpData);
 }
 
-async function isUserNameAvailable(username: string): Promise<boolean> {
+async function isUsernameAvailable(username: string): Promise<boolean> {
   const {isAvailable} = await authApi.isUserNameAvailable({username});
   return isAvailable;
 }
@@ -48,6 +48,6 @@ export const authService = {
   updateToken,
   removeToken,
   signUp,
-  isUserNameAvailable,
+  isUsernameAvailable,
   isEmailAvailable,
 };

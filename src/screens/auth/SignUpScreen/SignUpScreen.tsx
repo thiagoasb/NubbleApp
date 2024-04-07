@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {useAuthSignUp, useAuthUsernameIsAvailable} from '@domain';
+import {useAuthSignUp, useAuthIsUsernameAvailable} from '@domain';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
 
@@ -55,7 +55,7 @@ export function SignUpScreen({}: AuthScreenProps<'SignUpScreen'>) {
   const username = watch('username');
   const usernameState = getFieldState('username');
   const usernameIsValid = !usernameState.invalid && usernameState.isDirty;
-  const usernameQuery = useAuthUsernameIsAvailable({
+  const usernameQuery = useAuthIsUsernameAvailable({
     username,
     enabled: usernameIsValid,
   });
