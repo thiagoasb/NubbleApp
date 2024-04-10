@@ -1,7 +1,19 @@
 import {stringUtils} from '@utils';
 
-test('capitalizeFirstLetter', () => {
-  const name = stringUtils.capitalizeFirstLetter('Ana maria');
+describe('stringUtils', () => {
+  describe('capitalizeFirstLetter', () => {
+    it('should capitalize the first letter of each word', () => {
+      expect(stringUtils.capitalizeFirstLetter('Ana maria')).toBe('Ana Maria');
+      expect(stringUtils.capitalizeFirstLetter('ANA MARIA')).toBe('Ana Maria');
+      expect(stringUtils.capitalizeFirstLetter('maria')).toBe('Maria');
+      expect(stringUtils.capitalizeFirstLetter('MARIA')).toBe('Maria');
+      expect(stringUtils.capitalizeFirstLetter('MaRIA')).toBe('Maria');
+      expect(stringUtils.capitalizeFirstLetter('ana maria')).toBe('Ana Maria');
+    });
 
-  expect(name).toBe('Ana Maria');
+    it('should remove leading/trailing space', () => {
+      expect(stringUtils.capitalizeFirstLetter(' Ana maria')).toBe('Ana Maria');
+      expect(stringUtils.capitalizeFirstLetter('Ana maria ')).toBe('Ana Maria');
+    });
+  });
 });
