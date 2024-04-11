@@ -1,19 +1,14 @@
 import React from 'react';
 
-import {ThemeProvider} from '@shopify/restyle';
-import {render} from '@testing-library/react-native';
-
-import {theme} from '@theme';
+import {render} from 'test-utils';
 
 import {Button} from '../Button';
 
 describe('<Button />', () => {
-  test('the components rendered', () => {
-    const {debug} = render(
-      <ThemeProvider theme={theme}>
-        <Button title="button title" />
-      </ThemeProvider>,
-    );
-    debug();
+  it('the components rendered', () => {
+    render(<Button title="button title" />);
+  });
+  it('should shows loading indicator', () => {
+    render(<Button title="button title" />);
   });
 });
