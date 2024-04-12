@@ -29,6 +29,7 @@ export function Button({
   return (
     <TouchableOpacityBox
       // backgroundColor="buttonPrimary"
+      testID="button"
       disabled={disabled || loading}
       paddingHorizontal="s20"
       height={50}
