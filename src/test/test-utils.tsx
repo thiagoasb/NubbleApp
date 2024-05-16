@@ -2,7 +2,11 @@ import React, {ReactElement} from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {ThemeProvider} from '@shopify/restyle';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+import {
+  QueryClient,
+  QueryClientConfig,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import {
   RenderOptions,
   render,
@@ -12,24 +16,26 @@ import {
 
 import {theme} from '@theme';
 
-export const wrapperAllProviders = () => {
-  const queryClient = new QueryClient({
-    logger: {
-      log: console.log,
-      warn: console.warn,
-      error: process.env.NODE_ENV === 'test' ? () => {} : console.error,
+const queryClientConfig: QueryClientConfig = {
+  logger: {
+    log: console.log,
+    warn: console.warn,
+    error: process.env.NODE_ENV === 'test' ? () => {} : console.error,
+  },
+  defaultOptions: {
+    queries: {
+      retry: false,
+      cacheTime: Infinity,
     },
-    defaultOptions: {
-      queries: {
-        retry: false,
-        cacheTime: Infinity,
-      },
-      mutations: {
-        retry: false,
-        cacheTime: Infinity,
-      },
+    mutations: {
+      retry: false,
+      cacheTime: Infinity,
     },
-  });
+  },
+};
+
+export const wrapAllProviders = () => {
+  const queryClient = new QueryClient(queryClientConfig);
 
   return ({children}: {children: React.ReactNode}) => (
     <QueryClientProvider client={queryClient}>
@@ -44,7 +50,26 @@ function customRender<T = unknown>(
   component: ReactElement<T>,
   options?: Omit<RenderOptions, 'wrapper'>,
 ) {
-  return render(component, {wrapper: wrapperAllProviders(), ...options});
+  return render(component, {wrapper: wrapAllProviders(), ...options});
+}
+
+export const wrapScreenProviders = () => {
+  const queryClient = new QueryClient(queryClientConfig);
+
+  return ({children}: {children: React.ReactNode}) => (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>{children}</NavigationContainer>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
+
+function renderScreen<T = unknown>(
+  component: ReactElement<T>,
+  options?: Omit<RenderOptions, 'wrapper'>,
+) {
+  return render(component, {wrapper: wrapScreenProviders(), ...options});
 }
 
 function customRenderHook<Result, Props>(
@@ -52,7 +77,7 @@ function customRenderHook<Result, Props>(
   options?: Omit<RenderHookOptions<Props>, 'wrapper'>,
 ) {
   return renderHook(renderCallback, {
-    wrapper: wrapperAllProviders(),
+    wrapper: wrapAllProviders(),
     ...options,
   });
 }
@@ -60,3 +85,4 @@ function customRenderHook<Result, Props>(
 export * from '@testing-library/react-native';
 export {customRender as render};
 export {customRenderHook as renderHook};
+export {renderScreen};

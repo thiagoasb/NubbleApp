@@ -8,4 +8,7 @@ module.exports = {
   moduleDirectories: ['node_modules', './src/test'],
   modulePathIgnorePatterns: ['.*/mockedData/.*'],
   coveragePathIgnorePatterns: ['/node_modules/', 'index'],
+  transformIgnorePatterns: [
+    'node_modules/(?!((jest-)?react-native|@react-native(-community)?|react-native-safe-area-context)/)',
+  ],
 };
