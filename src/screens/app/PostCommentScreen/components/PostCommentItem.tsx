@@ -9,7 +9,7 @@ import {Box, ProfileAvatar, Text} from '@components';
 interface Props {
   postId: number;
   postComment: PostComment;
-  userId: number;
+  userId: number | null;
   postAuthorId: number;
 }
 
@@ -30,8 +30,8 @@ export function PostCommentItem({
 
   const isAllowToDelete = postCommentService.isAllowToDelete(
     postComment,
-    postAuthorId,
     userId,
+    postAuthorId,
   );
 
   function confirmRemove() {
