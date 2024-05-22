@@ -2,7 +2,7 @@ module.exports = {
   preset: 'react-native',
   setupFiles: ['<rootDir>/src/test/jestSetup.ts'],
   collectCoverageFrom: [
-    'src/{components,utils,hooks,domain}/**/*.{js,jsx,ts,tsx}',
+    'src/{components,utils,hooks,domain,screens}/**/*.{js,jsx,ts,tsx}',
   ],
   setupFilesAfterEnv: ['@testing-library/react-native/extend-expect'],
   moduleDirectories: ['node_modules', './src/test'],
