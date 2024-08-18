@@ -13,7 +13,8 @@
     "prepare": "husky install",
     "android-connect": "adb reverse tcp:3333 tcp:3333",
     "tsc-error": "tsc --noEmit",
-    "ap": "adb shell input text"
+    "ap": "adb shell input text",
+    "pre-commit": "yarn lint && yarn tsc --notEmit && yarn test"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.3",
