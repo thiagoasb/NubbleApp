@@ -15,6 +15,7 @@ import {
   RenderHookOptions,
 } from '@testing-library/react-native';
 
+import {Toast} from '@components';
 import {theme} from '@theme';
 
 const queryClientConfig: QueryClientConfig = {
@@ -62,6 +63,7 @@ export const wrapScreenProviders = () => {
       <QueryClientProvider client={queryClient}>
         <ThemeProvider theme={theme}>
           <NavigationContainer>{children}</NavigationContainer>
+          <Toast />
         </ThemeProvider>
       </QueryClientProvider>
     </AuthCredentialsProvider>
